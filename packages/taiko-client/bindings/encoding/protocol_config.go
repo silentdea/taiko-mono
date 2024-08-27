@@ -19,7 +19,7 @@ var (
 		LivenessBond:          livenessBond,
 		StateRootSyncInternal: 16,
 		MaxAnchorHeightOffset: 64,
-		OntakeForkHeight:      2,
+		OntakeForkHeight:      10000,
 		BaseFeeConfig: bindings.TaikoDataBaseFeeConfig{
 			AdjustmentQuotient:     8,
 			GasIssuancePerSecond:   5_000_000,
