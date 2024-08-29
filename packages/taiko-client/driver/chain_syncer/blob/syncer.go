@@ -501,11 +501,13 @@ func (s *Syncer) createExecutionPayloads(
 		"gasUsed", payload.GasUsed,
 		"timestamp", payload.Timestamp,
 		"withdrawalsHash", payload.WithdrawalsHash,
+		"FeeRecipient", payload.FeeRecipient,
 	)
 
 	// Step 3, execute the payload
 	execStatus, err := s.rpc.L2Engine.NewPayload(ctx, payload)
 	if err != nil {
+		log.Info("Failed to create a new payload", "err", err)
 		return nil, fmt.Errorf("failed to create a new payload: %w", err)
 	}
 	if execStatus.Status != engine.VALID {
