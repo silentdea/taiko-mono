@@ -471,6 +471,7 @@ func (s *Syncer) createExecutionPayloads(
 		"extraData", string(attributes.BlockMetadata.ExtraData),
 		"l1OriginHeight", attributes.L1Origin.L1BlockHeight,
 		"l1OriginHash", attributes.L1Origin.L1BlockHash,
+		"beaconRoot", attributes.BeaconRoot,
 	)
 
 	// Step 1, prepare a payload
@@ -501,7 +502,8 @@ func (s *Syncer) createExecutionPayloads(
 		"gasUsed", payload.GasUsed,
 		"timestamp", payload.Timestamp,
 		"withdrawalsHash", payload.WithdrawalsHash,
-		"FeeRecipient", payload.FeeRecipient,
+		"feeRecipient", payload.FeeRecipient,
+		"root", payload.StateRoot,
 	)
 
 	// Step 3, execute the payload
