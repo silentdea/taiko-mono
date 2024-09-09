@@ -152,7 +152,7 @@ library LibProposing {
 
         address permittedProposer = _resolver.resolve(LibStrings.B_BLOCK_PROPOSER, true);
         if (permittedProposer != address(0)) {
-            require(permittedProposer == msg.sender, L1_INVALID_PROPOSER());
+            require(permittedProposer == msg.sender, "L1_INVALID_PROPOSER");
             local.allowCustomProposer = true;
         }
 
@@ -171,7 +171,7 @@ library LibProposing {
         } else {
             require(
                 local.params.proposer == msg.sender || local.allowCustomProposer,
-                L1_INVALID_CUSTOM_PROPOSER()
+                "L1_INVALID_CUSTOM_PROPOSER"
             );
         }
 
