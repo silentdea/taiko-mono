@@ -2,7 +2,7 @@ name: "Push docker image to GAR"
 
 on:
   push:
-    branches: [main]
+    branches: [test-0.36]
     tags:
       - "taiko-client-v*"
     paths:
