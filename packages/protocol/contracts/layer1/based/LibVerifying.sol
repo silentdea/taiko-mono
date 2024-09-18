@@ -40,7 +40,7 @@ library LibVerifying {
         IAddressResolver _resolver,
         uint64 _maxBlocksToVerify
     )
-        public
+    public
     {
         if (_maxBlocksToVerify == 0) {
             return;
@@ -98,20 +98,6 @@ library LibVerifying {
 
                 if (ts.contester != address(0)) {
                     break;
-                } else {
-                    if (local.tierRouter == ITierRouter(address(0))) {
-                        local.tierRouter =
-                            ITierRouter(_resolver.resolve(LibStrings.B_TIER_ROUTER, false));
-                    }
-
-                    uint24 cooldown = ITierProvider(local.tierRouter.getProvider(local.blockId))
-                        .getTier(local.tier).cooldownWindow;
-
-                    if (!LibUtils.isPostDeadline(ts.timestamp, local.b.lastUnpausedAt, cooldown)) {
-                        // If cooldownWindow is 0, the block can theoretically
-                        // be proved and verified within the same L1 block.
-                        break;
-                    }
                 }
 
                 // Update variables
@@ -177,7 +163,7 @@ library LibVerifying {
 
                     // Ask signal service to write cross chain signal
                     ISignalService(_resolver.resolve(LibStrings.B_SIGNAL_SERVICE, false))
-                        .syncChainData(
+                    .syncChainData(
                         _config.chainId,
                         LibStrings.H_STATE_ROOT,
                         local.syncBlockId,
@@ -193,9 +179,9 @@ library LibVerifying {
         TaikoData.Config memory _config,
         uint64 _blockId
     )
-        internal
-        view
-        returns (address)
+    internal
+    view
+    returns (address)
     {
         (TaikoData.BlockV2 storage blk,) = LibUtils.getBlock(_state, _config, _blockId);
 

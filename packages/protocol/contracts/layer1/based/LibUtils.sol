@@ -94,6 +94,37 @@ library LibUtils {
         }
     }
 
+    function initGenesis(
+        TaikoData.State storage _state,
+        TaikoData.Config memory _config,
+        bytes32 _genesisBlockHash
+    )
+    internal
+    {
+        if (_genesisBlockHash == 0) revert L1_INVALID_GENESIS_HASH();
+
+        // Init the first state transition
+        TaikoData.TransitionState storage ts = _state.transitions[0][1];
+        ts.blockHash = _genesisBlockHash;
+
+        if (_config.ontakeForkHeight == 0) {
+            emit BlockVerifiedV2({
+                blockId: 0,
+                prover: address(0),
+                blockHash: _genesisBlockHash,
+                tier: 0
+            });
+        } else {
+            emit BlockVerified({
+                blockId: 0,
+                prover: address(0),
+                blockHash: _genesisBlockHash,
+                stateRoot: 0,
+                tier: 0
+            });
+        }
+    }
+
     /// @dev Retrieves a block based on its ID.
     /// @param _state Current TaikoData.State.
     /// @param _config Actual TaikoData.Config.
