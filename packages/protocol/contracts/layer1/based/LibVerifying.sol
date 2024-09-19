@@ -40,7 +40,7 @@ library LibVerifying {
         IAddressResolver _resolver,
         uint64 _maxBlocksToVerify
     )
-    public
+        public
     {
         if (_maxBlocksToVerify == 0) {
             return;
@@ -163,7 +163,7 @@ library LibVerifying {
 
                     // Ask signal service to write cross chain signal
                     ISignalService(_resolver.resolve(LibStrings.B_SIGNAL_SERVICE, false))
-                    .syncChainData(
+                        .syncChainData(
                         _config.chainId,
                         LibStrings.H_STATE_ROOT,
                         local.syncBlockId,
@@ -179,9 +179,9 @@ library LibVerifying {
         TaikoData.Config memory _config,
         uint64 _blockId
     )
-    internal
-    view
-    returns (address)
+        internal
+        view
+        returns (address)
     {
         (TaikoData.BlockV2 storage blk,) = LibUtils.getBlock(_state, _config, _blockId);
 
