@@ -185,7 +185,6 @@ func (s *ProofSubmitter) RequestProof(ctx context.Context, meta metadata.TaikoBl
 			metrics.ProverQueuedProofCounter.Add(1)
 			return nil
 		},
-		
 		backoff.WithContext(backoff.NewConstantBackOff(proofPollingInterval), ctx),
 	); err != nil {
 		log.Error("Request proof error", "error", err)
