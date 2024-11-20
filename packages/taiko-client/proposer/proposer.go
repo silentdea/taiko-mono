@@ -193,9 +193,9 @@ func (p *Proposer) fetchPoolContent(filterPoolContent bool) ([]types.Transaction
 	)
 	// If `--epoch.allowZeroInterval` flag is set, allow proposing zero tip transactions once when
 	// the total epochs number is divisible by the flag value.
-	if p.AllowZeroInterval > 0 && p.totalEpochs%p.AllowZeroInterval == 0 {
-		minTip = 0
-	}
+	//if p.AllowZeroInterval > 0 && p.totalEpochs%p.AllowZeroInterval == 0 {
+	//	minTip = 0
+	//}
 
 	// Fetch the pool content.
 	preBuiltTxList, err := p.rpc.GetPoolContent(
@@ -231,17 +231,17 @@ func (p *Proposer) fetchPoolContent(filterPoolContent bool) ([]types.Transaction
 		txLists = append(txLists, txs.TxList)
 	}
 	// If the pool content is empty and the checkPoolContent flag is not set, return an empty list.
-	if !filterPoolContent && len(txLists) == 0 {
-		log.Info(
-			"Pool content is empty, proposing an empty block",
-			"lastProposedAt", p.lastProposedAt,
-			"minProposingInternal", p.MinProposingInternal,
-		)
-		txLists = append(txLists, types.Transactions{})
-	}
+	//if !filterPoolContent && len(txLists) == 0 {
+	//	log.Info(
+	//		"Pool content is empty, proposing an empty block",
+	//		"lastProposedAt", p.lastProposedAt,
+	//		"minProposingInternal", p.MinProposingInternal,
+	//	)
+	//	txLists = append(txLists, types.Transactions{})
+	//}
 
 	// If LocalAddressesOnly is set, filter the transactions by the local addresses.
-	if p.LocalAddressesOnly {
+	/*if p.LocalAddressesOnly {
 		var (
 			localTxsLists []types.Transactions
 			signer        = types.LatestSignerForChainID(p.rpc.L2.ChainID)
@@ -266,7 +266,7 @@ func (p *Proposer) fetchPoolContent(filterPoolContent bool) ([]types.Transaction
 			}
 		}
 		txLists = localTxsLists
-	}
+	}*/
 
 	log.Info("Transactions lists count", "count", len(txLists))
 
